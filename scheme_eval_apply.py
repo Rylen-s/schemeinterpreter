@@ -79,9 +79,16 @@ def eval_all(expressions, env):
     2
     """
     # BEGIN PROBLEM 6
-    return scheme_eval(expressions.first, env) # replace this with lines of your own code
-    # END PROBLEM 6
+    if expressions is nil:
+        return None
 
+    result = None
+    while expressions is not nil:
+        result = scheme_eval(expressions.first, env)
+        expressions = expressions.rest
+
+    return result
+    # END PROBLEM 6
 
 ################################
 # Extra Credit: Tail Recursion #
