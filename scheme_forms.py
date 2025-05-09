@@ -115,7 +115,26 @@ def do_and_form(expressions, env):
     False
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+# I will clear this later after testing.
+
+# The logical forms and and or are short-circuiting. 
+# For and, your interpreter should evaluate each sub-expression
+# from left to right, and if any of these is a false value,
+# return that value. Otherwise, return the value of the last 
+# sub-expression.
+#  If there are no sub-expressions in an and expression, it evaluates to #t.
+
+    if expressions is nil:
+        return True
+
+    result = None
+    while expressions is not nil:
+        result = scheme_eval(expressions.first, env)
+        if is_scheme_false(result):
+            return result
+        expressions = expressions.rest
+
+    return result
     # END PROBLEM 12
 
 def do_or_form(expressions, env):
@@ -133,7 +152,23 @@ def do_or_form(expressions, env):
     6
     """
     # BEGIN PROBLEM 12
-    "*** YOUR CODE HERE ***"
+# I will clear this later after testing.
+# For or, evaluate each sub-expression from left to right. 
+# If any sub-expression evaluates to a true value, return that value. 
+# Otherwise, return the value of the last sub-expression. 
+# If there are no sub-expressions in an or expression, it evaluates to #f.
+
+    if expressions is nil:
+        return False
+
+    result = None
+    while expressions is not nil:
+        result = scheme_eval(expressions.first, env)
+        if is_scheme_true(result):
+            return result
+        expressions = expressions.rest
+
+    return result
     # END PROBLEM 12
 
 def do_cond_form(expressions, env):
