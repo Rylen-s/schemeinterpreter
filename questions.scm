@@ -17,7 +17,20 @@
 ;; the merged lists.
 (define (merge ordered? s1 s2)
   ; BEGIN PROBLEM 16
-  'replace-this-line
+; Implement the merge procedure, which takes in a comparator function ordered? 
+;and two lists that are sorted according to the comparator and combines the two 
+;lists into a single sorted list. A comparator defines an ordering by comparing 
+;two values and returning a true value if and only if the two values are ordered.
+; need to test. But should work
+  (define (merge ordered? s1 s2)
+  (cond
+    ((null? s1) s2)
+    ((null? s2) s1)
+    ((ordered? (car s1) (car s2))
+    (cons (car s1) (merge ordered? (cdr s1) s2)))
+    (else
+    (cons (car s2) (merge ordered? s1 (cdr s2)))))
+  )
   )
   ; END PROBLEM 16
 
