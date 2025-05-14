@@ -57,8 +57,14 @@ class Frame:
             raise SchemeError('Incorrect number of arguments to function call')
         # BEGIN PROBLEM 8
         child = Frame(self)
-        for sym, val in zip(formals, vals):
-            child.define(sym, val)
+        po1 = formals
+        po2 = vals
+        while po1 is not nil:
+            key = po1.first
+            value = po2.first
+            po1 = po1.rest
+            po2 = po2.rest
+            child.define(key, value)
         return child
         # END PROBLEM 8
 
