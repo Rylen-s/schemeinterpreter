@@ -32,7 +32,6 @@ class Frame:
     def lookup(self, symbol):
         """Return the value bound to SYMBOL. Errors if SYMBOL is not found."""
         # BEGIN PROBLEM 1
-        "*** YOUR CODE HERE ***"
         if symbol in self.bindings:
             return self.bindings[symbol]
         elif self.parent is not None:
@@ -110,7 +109,7 @@ class LambdaProcedure(Procedure):
             repr(self.formals), repr(self.body), repr(self.env))
 
 class MuProcedure(Procedure):
-    """A procedure defined by a mu expression, which has dynamic scope.
+    r"""A procedure defined by a mu expression, which has dynamic scope.
      _________________
     < Scheme is cool! >
      -----------------

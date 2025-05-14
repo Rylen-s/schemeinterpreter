@@ -22,11 +22,6 @@
 ;; the merged lists.
 (define (merge ordered? s1 s2)
   ; BEGIN PROBLEM 16
-; Implement the merge procedure, which takes in a comparator function ordered? 
-;and two lists that are sorted according to the comparator and combines the two 
-;lists into a single sorted list. A comparator defines an ordering by comparing 
-;two values and returning a true value if and only if the two values are ordered.
-; need to test. But should work
   (define (merge ordered? s1 s2)
   (cond
     ((null? s1) s2)
@@ -54,12 +49,12 @@
 (define (let-to-lambda expr)
   (cond ((atom? expr)
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+         expr
          ; END OPTIONAL PROBLEM 2
          )
         ((quoted? expr)
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+         expr
          ; END OPTIONAL PROBLEM 2
          )
         ((or (lambda? expr)
@@ -68,23 +63,36 @@
                (params (cadr expr))
                (body   (cddr expr)))
            ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
+          (cons form (cons params (map let-to-lambda body)))
            ; END OPTIONAL PROBLEM 2
            ))
         ((let? expr)
          (let ((values (cadr expr))
                (body   (cddr expr)))
            ; BEGIN OPTIONAL PROBLEM 2
-           'replace-this-line
+           (let ((values (cadr expr))
+                (body (cddr expr)))
+              (let ((zipped (zip values)))
+                (cons (cons 'lambda (cons (car zipped)
+                  (map let-to-lambda body)))
+                  (cdr zipped))))
            ; END OPTIONAL PROBLEM 2
            ))
         (else
          ; BEGIN OPTIONAL PROBLEM 2
-         'replace-this-line
+         (map let-to-lambda expr)
          ; END OPTIONAL PROBLEM 2
          )))
 
 ; Some utility functions that you may find useful to implement for let-to-lambda
 
 (define (zip pairs)
-  'replace-this-line)
+  (define (firsts lst)
+    (if (null? lst)
+        '()
+        (cons (car (car lst)) (firsts (cdr lst)))))
+  (define (seconds lst)
+    (if (null? lst)
+        '()
+        (cons (cadr (car lst)) (seconds (cdr lst)))))
+  (cons (firsts pairs) (seconds pairs)))
